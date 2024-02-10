@@ -66,4 +66,6 @@ imagem_pagar = py.locateCenterOnScreen('C:\\Users\\filho\\PycharmProjects\\Detra
 py.click(imagem_pagar.x,imagem_pagar.y)
 #Colocar o codigo do banco na planilha
 
-#testando
+
+
+#kakak
