@@ -1,7 +1,9 @@
 import pyautogui as py
+import pandas as pd
+locadora = 'C:/Users/anderson.filho/PycharmProjects/pythonProject/Detran_loc/LOCADORA_2024.xlsx'
+locadora_df = pd.read_excel(locadora)
 
-py.sleep(4),py.press('PageUP'),py.sleep(1)
-imagem_pagar = py.locateCenterOnScreen('C:\\Users\\filho\\PycharmProjects\\Detran_loc\\pagar.png',confidence=0.7)
-py.click(imagem_pagar.x,imagem_pagar.y)
-
-
+renavam = str(locadora_df.loc[4,'Renavam'])
+py.sleep(1)
+py.hotkey('Ctrl','s'),py.sleep(2),py.press('Backspace'),py.typewrite(renavam),py.sleep(1)
+py.press('Tab'),py.press('Tab'),py.press('Tab'),py.press('Enter')

@@ -96,7 +96,7 @@ with open(boleto, 'rb') as pdf_file:
     lines = text_last_page.split('\n')
     dados_bancario = lines[-7]
     print(dados_bancario)
-
+#testando git
 #Colocar o codigo do banco na planilha
 
 #testando
