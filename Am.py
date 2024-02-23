@@ -1,10 +1,9 @@
 import time
 import pandas as pd
-
+i = 2
 locadora = 'C:/Users/anderson.filho/PycharmProjects/pythonProject/Detran_loc/LOCADORA_2024.xlsx'
 locadora_df = pd.read_excel(locadora)
-
-renavam = str(locadora_df.loc[4,'Renavam'])
+renavam = str(locadora_df.loc[i,'Renavam'])
 print(renavam)
 
 UF_Choose = 'AM'
@@ -62,19 +61,20 @@ try:
     posicao = py.locateCenterOnScreen(imagem_solicitar, confidence=0.7)
     # Se a imagem for encontrada, clique nela
     if posicao is not None:
-        py.click(posicao)
+        py.sleep(3)
+        py.click(posicao),py.press('PageUP')
         print("Imagem de solicitar encontrada e clicada com sucesso!")
     else:
         print("Imagem de Solicitar não .")
 # Se ocorrer uma exceção (imagem não encontrada), continue para a próxima etapa
 except py.ImageNotFoundException:
-    print("Imagem não encontrada na tela. Continuando para a próxima etapa.")
+    print("Imagem de solicitar não encontrada na tela.")
 
 
 #CLicar em "pagar taxa do detran " para pegar boleto
-py.sleep(4),py.press('PageUP'),py.press('PageUP'),py.sleep(2),py.press('PageUP')
+py.sleep(4),py.press('PageUP'),py.press('PageUP'),py.press('Down')
 imagem_pagar = py.locateCenterOnScreen('C:/Users/anderson.filho/Pictures/pagar.png',confidence=0.7)
-py.click(imagem_pagar.x,imagem_pagar.y)
+py.sleep(2),py.click(imagem_pagar.x,imagem_pagar.y)
 
 #salvar boleto
 py.sleep(3)
@@ -98,5 +98,16 @@ with open(boleto, 'rb') as pdf_file:
     print(dados_bancario)
 
 #Colocar o codigo do banco na planilha
-
+# Caminho para o arquivo Excel
+file_path = 'C:/Users/anderson.filho/PycharmProjects/pythonProject/Detran_loc/LOCADORA_2024.xlsx'
+# Carregar o arquivo Excel em um DataFrame do Pandas
+df = pd.read_excel(file_path)
+# Converter a coluna 'IPVA' para tipo string
+df['IPVA'] = df['IPVA'].astype(str)
+# Modificar a linha 1 e a coluna 'IPVA'
+df.loc[i, 'IPVA'] = dados_bancario  # Modifica a linha 1, coluna 'IPVA'
+# Nome do arquivo para salvar
+output_file = 'C:/Users/anderson.filho/PycharmProjects/pythonProject/Detran_loc/teste_de_excel.xlsx'
+# Salvar as modificações de volta no arquivo Excel com o novo nome
+df.to_excel(output_file, index=False)  # index=False para não salvar o índice do DataFrame
 #testando
